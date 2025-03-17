@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register User</title>
+    <style>
+        body { 
+            font-family: 'Arial', sans-serif; 
+            background-color: #f8f9fa; 
+            text-align: center; 
+            margin: 0; 
+            padding: 20px; 
+        }
+
+        form { 
+            display: inline-block; 
+            text-align: left; 
+            background: white; 
+            padding: 25px; 
+            border-radius: 12px; 
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            max-width: 350px; 
+            width: 100%;
+        }
+
+        label { 
+            font-weight: bold; 
+            margin-bottom: 5px; 
+            display: block; 
+            color: #555;
+        }
+
+        input { 
+            display: block; 
+            width: 100%; 
+            padding: 10px; 
+            margin: 8px 0 16px; 
+            border: 1px solid #ccc; 
+            border-radius: 6px; 
+            font-size: 16px; 
+        }
+
+        .button-container {
+            display: flex;
+            gap: 10px;
+        }
+
+        button { 
+            flex: 1;
+            background: #28a745; 
+            color: white; 
+            padding: 12px; 
+            font-size: 16px; 
+            border: none; 
+            border-radius: 6px; 
+            cursor: pointer; 
+            transition: background 0.3s ease;
+        }
+
+        button:hover { 
+            background: #218838; 
+        }
+
+        .history-btn {
+            background: #007bff;
+        }
+
+        .history-btn:hover {
+            background: #0056b3;
+        }
+
+        .message {
+            background: #d4edda; 
+            color: #155724; 
+            padding: 10px; 
+            margin-top: 15px;  /* Space between form and message */
+            border-radius: 6px;
+            text-align: center;
+            display: block;
+        }
+
+        @media (max-width: 400px) {
+            form {
+                width: 90%;
+            }
+
+            .button-container {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Register User</h2>
+
+    <form action="/submit" method="POST">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" placeholder="Enter your name" required>
+        
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+        
+        <div class="button-container">
+            <button type="submit">Submit</button>
+            <button type="button" class="history-btn" onclick="window.location.href='/history'">History</button>
+        </div>
+
+        {% if message %}
+            <div class="message">{{ message }}</div>  <!-- Message appears at the bottom -->
+        {% endif %}
+    </form>
+
+</body>
+</html>
