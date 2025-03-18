@@ -35,8 +35,8 @@ pipeline {
             steps {
                 script {
                     echo "Building frontend and backend Docker images..."
-                    sh 'docker build -t my_project_jenkins/frontend:latest ./frontend'
-                    sh 'docker build -t my_project_jenkins/backend:latest ./backend'
+                    sh 'docker build -t Webapp/frontend:latest ./frontend'
+                    sh 'docker build -t Webapp/backend:latest ./backend'
                 }
             }
         }
