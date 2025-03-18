@@ -6,7 +6,7 @@ pipeline {
     }
 
     environment {
-        DOCKER_CREDENTIALS_ID = 'pat-credential-github'
+        DOCKER_CREDENTIALS_ID = 'lab_jenkins_PAT'
         GITHUB_REPO = 'https://github.com/ayusao/test_lab.git'
     }
 
