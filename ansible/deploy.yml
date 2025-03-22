@@ -3,19 +3,19 @@
   hosts: webserver
   tasks:
 
-    - name: Ensure /home/user/app directory exists
+    - name: Ensure /home/ayusao/disk/labs/ansible directory exists
       file:
-        path: /home/user/app
+        path: /home/ayusao/disk/labs/ansible
         state: directory
         mode: '0777'
 
     - name: Pull latest code from GitHub
       git:
         repo: 'https://github.com/ayusao/test_lab.git'
-        dest: /home/user/app
+        dest: /home/ayusao/disk/labs/ansible
         version: main
 
     - name: Build and run Docker containers
       command: docker-compose up -d
       args:
-        chdir: /home/user/app
+        chdir: /home/ayusao/disk/labs/ansible
