@@ -20,13 +20,7 @@ pipeline {
                 }
             }
         }
-        stage('Deploy with Ansible') {
-            steps {
-                script {
-                    sh 'ansible-playbook -i ansible/hosts ansible/deploy.yml --become'
-                }
-            }
-
+        
         stage('Check Docker Access') { 
             steps {
                 script {
@@ -64,5 +58,11 @@ pipeline {
             echo "Pipeline execution completed!"
         }
     }
-}
+    stage('Deploy with Ansible') {
+            steps {
+                script {
+                    sh 'ansible-playbook -i ansible/hosts ansible/deploy.yml --become'
+                }
+            }
+        }
 }
