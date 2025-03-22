@@ -3,12 +3,6 @@
   hosts: webserver
   tasks:
 
-    - name: Ensure /home/ayusao/disk/labs/ansible directory exists
-      file:
-        path: /home/ayusao/disk/labs/ansible
-        state: directory
-        mode: '0777'
-
     - name: Pull latest code from GitHub
       git:
         repo: 'https://github.com/ayusao/test_lab.git'
