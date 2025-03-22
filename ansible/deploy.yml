@@ -3,11 +3,11 @@
   hosts: webserver
   tasks:
 
-    - name: Ensure Docker is installed
-      command: docker --version
-      register: docker_version
-      failed_when: docker_version.rc != 0
-      changed_when: false
+    - name: Ensure /home/user/app directory exists
+      file:
+        path: /home/user/app
+        state: directory
+        mode: '0777'
 
     - name: Pull latest code from GitHub
       git:
