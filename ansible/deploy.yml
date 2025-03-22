@@ -4,14 +4,14 @@
   become: true  # Runs tasks with sudo
 
   tasks:
-    - name: Install required packages
-      apt:
-        name:
-          - docker.io
-          - docker-compose
-          - git
-        state: present
-        update_cache: yes
+    # - name: Install required packages
+    #   apt:
+    #     name:
+    #       - docker.io
+    #       - docker-compose
+    #       - git
+    #     state: present
+    #     update_cache: yes
 
     - name: Clone the latest code from GitHub
       git:
