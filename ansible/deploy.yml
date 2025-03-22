@@ -1,15 +1,41 @@
 ---
-- name: Deploy Application on Localhost
-  hosts: webserver
+- name: Deploy Web Application Locally
+  hosts: localhost
+  become: true  # Runs tasks with sudo
+
   tasks:
+    - name: Install required packages
+      apt:
+        name:
+          - docker.io
+          - docker-compose
+          - git
+        state: present
+        update_cache: yes
 
-    - name: Pull latest code from GitHub
+    - name: Clone the latest code from GitHub
       git:
-        repo: 'https://github.com/ayusao/test_lab.git'
-        dest: /home/ayusao/disk/labs/ansible
+        repo: "https://github.com/ayusao/test_lab.git"
+        dest: "/home/{{ ansible_env.USER }}/test_lab"
         version: main
+        force: yes
 
-    - name: Build and run Docker containers
-      command: docker-compose up -d
+    - name: Build frontend Docker image
+      command: docker build -t Webapp/frontend:latest ./frontend
       args:
-        chdir: /home/ayusao/disk/labs/ansible
+        chdir: "/home/{{ ansible_env.USER }}/test_lab"
+
+    - name: Build backend Docker image
+      command: docker build -t Webapp/backend:latest ./backend
+      args:
+        chdir: "/home/{{ ansible_env.USER }}/test_lab"
+
+    - name: Stop existing containers
+      command: docker-compose down || true
+      args:
+        chdir: "/home/{{ ansible_env.USER }}/test_lab"
+
+    - name: Run Docker Compose
+      command: docker-compose up -d --build
+      args:
+        chdir: "/home/{{ ansible_env.USER }}/test_lab"

@@ -20,11 +20,12 @@ pipeline {
                 }
             }
         }
-        stage('Run Ansible Playbook') {
+        stage('Deploy with Ansible') {
             steps {
-                sh 'ansible-playbook -i ansible/hosts.ini ansible/deploy.yml'
+                script {
+                    sh 'ansible-playbook -i ansible/hosts ansible/deploy.yml --become'
+                }
             }
-        }
 
         stage('Check Docker Access') { 
             steps {
