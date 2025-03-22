@@ -8,6 +8,7 @@ pipeline {
     environment {
         DOCKER_CREDENTIALS_ID = 'lab_jenkins_PAT'
         GITHUB_REPO = 'https://github.com/ayusao/test_lab.git'
+        ANSIBLE_HOST_KEY_CHECKING = 'False'
     }
 
     stages {
@@ -17,6 +18,11 @@ pipeline {
                     echo "Cloning the repository from GitHub..."
                     git branch: 'main', credentialsId: "${DOCKER_CREDENTIALS_ID}", url: "${GITHUB_REPO}"
                 }
+            }
+        }
+        stage('Run Ansible Playbook') {
+            steps {
+                sh 'ansible-playbook -i ansible/hosts.ini ansible/deploy.yml'
             }
         }
 

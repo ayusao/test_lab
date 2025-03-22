@@ -1,0 +1,21 @@
+---
+- name: Deploy Application on Localhost
+  hosts: webserver
+  become: yes
+  tasks:
+
+    - name: Install Docker
+      apt:
+        name: docker.io
+        state: present
+
+    - name: Pull latest code from GitHub
+      git:
+        repo: 'https://github.com/ayusao/test_lab.git'
+        dest: /home/user/app
+        version: main
+
+    - name: Build and run Docker containers
+      command: docker-compose up -d
+      args:
+        chdir: /home/user/app
