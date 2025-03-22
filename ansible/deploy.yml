@@ -33,6 +33,7 @@
         name: "{{ item }}"
         state: stopped
         remove: yes
+        force_kill: yes
       loop:
         - app-db2
         - app-backend2
