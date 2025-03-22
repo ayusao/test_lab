@@ -4,7 +4,7 @@ services:
   database:
     build:
       context: ./db
-    container_name: app-db2
+    container_name: app-db3
     ports:
       - "3307:3306"
     environment:
@@ -21,7 +21,7 @@ services:
   backend:
     build:
       context: ./backend
-    container_name: app-backend2
+    container_name: app-backend3
     volumes:
       - ./frontend/templates:/app/templates  # Mount frontend/templates into backend
     ports:
@@ -42,7 +42,7 @@ services:
   frontend:
     build:
       context: ./frontend
-    container_name: app-frontend2
+    container_name: app-frontend3
     ports:
       - "3001:3000"
     volumes:
