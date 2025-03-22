@@ -1,13 +1,13 @@
 ---
 - name: Deploy Application on Localhost
   hosts: webserver
-  become: yes
   tasks:
 
-    - name: Install Docker
-      apt:
-        name: docker.io
-        state: present
+    - name: Ensure Docker is installed
+      command: docker --version
+      register: docker_version
+      failed_when: docker_version.rc != 0
+      changed_when: false
 
     - name: Pull latest code from GitHub
       git:
