@@ -55,7 +55,7 @@ services:
       context: ./frontend
     container_name: app-frontend2
     ports:
-      - "3000:3000"
+      - "3001:3000"
     volumes:
       - ./frontend/templates:/app/templates
     depends_on:
