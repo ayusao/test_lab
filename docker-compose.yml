@@ -15,7 +15,7 @@ services:
   database:
     build:
       context: ./db
-    container_name: app-db
+    container_name: app-db2
     ports:
       - "3307:3306"
     environment:
