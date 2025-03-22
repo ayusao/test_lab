@@ -20,22 +20,26 @@
         version: main
         force: yes
 
-    - name: Build frontend Docker image
-      command: docker build -t Webapp/frontend:latest ./frontend
-      args:
-        chdir: "/home/{{ ansible_env.USER }}/test_lab"
+    - name: Ensure Docker images are up-to-date
+      docker_image:
+        name: "{{ item }}"
+        source: pull
+      loop:
+        - Webapp/frontend
+        - Webapp/backend
 
-    - name: Build backend Docker image
-      command: docker build -t Webapp/backend:latest ./backend
-      args:
-        chdir: "/home/{{ ansible_env.USER }}/test_lab"
-
-    - name: Stop existing containers
-      command: docker-compose down || true
-      args:
-        chdir: "/home/{{ ansible_env.USER }}/test_lab"
+    - name: Stop existing containers (if any)
+      docker_container:
+        name: "{{ item }}"
+        state: stopped
+        remove: yes
+      loop:
+        - app-db2
+        - app-backend2
+        - app-frontend2
 
     - name: Run Docker Compose
-      command: docker-compose up -d --build
-      args:
-        chdir: "/home/{{ ansible_env.USER }}/test_lab"
+      docker_compose:
+        project_src: "/home/{{ ansible_env.USER }}/test_lab"
+        restarted: yes
+        removed: yes

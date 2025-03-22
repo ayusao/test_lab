@@ -1,17 +1,6 @@
 version: '3.8'
 
 services:
-  # database:
-  #   build:
-  #     context: ./db
-  #   container_name: app-db
-  #   ports:
-  #     - "3307:3306"
-  #   environment:
-  #     - DB_HOST=db
-  #     - DB_USER=testuser
-  #     - DB_PASSWORD=TestPassword12!
-  #     - DB_NAME=testdb
   database:
     build:
       context: ./db
